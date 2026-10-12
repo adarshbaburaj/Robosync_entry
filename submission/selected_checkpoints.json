@@ -1,0 +1,596 @@
+{
+  "schema_note": "Local integration manifest, not the organizer API schema. Source results are published references; no local GPU evaluation has run.",
+  "upstream_repo": "https://github.com/EDEM-AI/RoboSynChallenge",
+  "upstream_revision": "8818c82df5fa2522809b8105e7018950dcc9a9a8",
+  "selection_source": "https://robosyn-bench.net/#/leaderboard",
+  "deadline_dubai": "2026-10-12T15:59:00+04:00",
+  "historical_selected_mean_success_rate_percent": 54.5,
+  "historical_selected_mean_score": 46.62,
+  "tasks": [
+    {
+      "task": "click_bell",
+      "policy": "dp",
+      "hf_repo_id": "RoboSynChallenge/DP_sim_click_bell",
+      "hf_revision": "fb8c9551e0fade7c4888a926ab577b85f0684da1",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/DP_sim_click_bell/tree/fb8c9551e0fade7c4888a926ab577b85f0684da1",
+      "local_checkpoint_dir": "checkpoints/DP_sim_click_bell",
+      "source_success_rate_percent": 51,
+      "source_score": 47.0,
+      "private": false,
+      "gated": false,
+      "config_type": "diffusion",
+      "config_action_steps": 32,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "24c856dbe3950bb834ab5a6c08e213945b4d65de",
+          "size": 2472
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "c44d2aa4a0ff5465684de0b8375ebe3ad789da56",
+          "size": 1083151064,
+          "lfs": {
+            "sha256": "b0de2a06a2bf1e1fd16a428b7ccc39595df686673f41c54323d42e031b03cf71",
+            "size": 1083151064,
+            "pointerSize": 135
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "2ec8d5467433c1dfd38cc742bad820f48b075524",
+          "size": 5982
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "table_rearrangement",
+      "policy": "smolvla",
+      "hf_repo_id": "RoboSynChallenge/SmolVLA_sim_table_rearrangement",
+      "hf_revision": "913b29a7136876108a330aead1855309f985cbd8",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_table_rearrangement/tree/913b29a7136876108a330aead1855309f985cbd8",
+      "local_checkpoint_dir": "checkpoints/SmolVLA_sim_table_rearrangement",
+      "source_success_rate_percent": 82,
+      "source_score": 70.6,
+      "private": false,
+      "gated": false,
+      "config_type": "smolvla",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "deca3a8d9378b4c5d2c815be89c3894e6adaa9ba",
+          "size": 2740
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "7d058981e56971d4fd75110f2cd3bef48e171b1f",
+          "size": 906712520,
+          "lfs": {
+            "sha256": "dee9a861d9e4e3dd57fc8f306d262d374d39c0c3c1032b399761c367d36fa08b",
+            "size": 906712520,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "policy_postprocessor.json",
+          "blobId": "81cbf1929298185a7c47eae0eab40c01a77835e3",
+          "size": 661
+        },
+        {
+          "rfilename": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "blobId": "d32d95f157b8ffc89309bfb732f78293618e90e4",
+          "size": 12000,
+          "lfs": {
+            "sha256": "90d3939de0fdc4f98be59ce8a712e654aa64765ace2a521344ab7f36dba1a53d",
+            "size": 12000,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "policy_preprocessor.json",
+          "blobId": "62f99eb1d7800d47ceba0e55ba0767e4cd0d7452",
+          "size": 2166
+        },
+        {
+          "rfilename": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "blobId": "ab7d5a363cd76fa231b73acdf960a173dd55d130",
+          "size": 12008,
+          "lfs": {
+            "sha256": "b982d016c31111a817176d8bbdbdc80d96929599081b025059b1a0047d869230",
+            "size": 12008,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "46ad94c8ef465c7232b00f0a8f9cb6b9cdaa640c",
+          "size": 7553
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "water_pouring",
+      "policy": "act",
+      "hf_repo_id": "RoboSynChallenge/ACT_sim_water_pouring",
+      "hf_revision": "0bf0fcfc931a69c52871385f28068fcf873cf07a",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/ACT_sim_water_pouring/tree/0bf0fcfc931a69c52871385f28068fcf873cf07a",
+      "local_checkpoint_dir": "checkpoints/ACT_sim_water_pouring",
+      "source_success_rate_percent": 72,
+      "source_score": 63.0,
+      "private": false,
+      "gated": false,
+      "config_type": "act",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "0a5a3fb11766e207370798d3f37986d3714f1829",
+          "size": 2065
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "f99c79e11c23db6bd4dd7968c6f771f0e046f8fb",
+          "size": 206563032,
+          "lfs": {
+            "sha256": "40aa483bf3ff18314e89c17ed91066cca867a8aa587c5fb9ecbb963c0eed330c",
+            "size": 206563032,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "c1d9c63b2ffac3ff4f0b58d4aaa3376802fba5a0",
+          "size": 5490
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "handle_basket",
+      "policy": "smolvla",
+      "hf_repo_id": "RoboSynChallenge/SmolVLA_sim_handle_basket",
+      "hf_revision": "0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_handle_basket/tree/0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+      "local_checkpoint_dir": "checkpoints/SmolVLA_sim_handle_basket",
+      "source_success_rate_percent": 40,
+      "source_score": 32.6,
+      "private": false,
+      "gated": false,
+      "config_type": "smolvla",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "deca3a8d9378b4c5d2c815be89c3894e6adaa9ba",
+          "size": 2740
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "07214f4cd427f0b2437368e54ac8ad36a3263431",
+          "size": 906712520,
+          "lfs": {
+            "sha256": "3c56e20a73900a4f7ef8655252c4e0cd195ae3db5c6990d0d133125f2ca1f0f4",
+            "size": 906712520,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "policy_postprocessor.json",
+          "blobId": "81cbf1929298185a7c47eae0eab40c01a77835e3",
+          "size": 661
+        },
+        {
+          "rfilename": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "blobId": "d063f4f27c9cfe7e4757d75df0d81b34e7d04a0e",
+          "size": 12000,
+          "lfs": {
+            "sha256": "e0600ca24e87549f1d953e718370ec9902418a36f76f510040fc2af776e58bba",
+            "size": 12000,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "policy_preprocessor.json",
+          "blobId": "62f99eb1d7800d47ceba0e55ba0767e4cd0d7452",
+          "size": 2166
+        },
+        {
+          "rfilename": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "blobId": "d5cc9df17ab28f3d56148fe244918e001272fb5b",
+          "size": 12008,
+          "lfs": {
+            "sha256": "fb989d7feb50ded62b4fbc1da0bc1fb58021dd872b016261295ad93c2a61fde2",
+            "size": 12008,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "31996667731901036303e258949985ddee758376",
+          "size": 7529
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "items_handover",
+      "policy": "smolvla",
+      "hf_repo_id": "RoboSynChallenge/SmolVLA_sim_items_handover",
+      "hf_revision": "fabe9462853965228e90e34bd517aa4e43bad323",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_items_handover/tree/fabe9462853965228e90e34bd517aa4e43bad323",
+      "local_checkpoint_dir": "checkpoints/SmolVLA_sim_items_handover",
+      "source_success_rate_percent": 30,
+      "source_score": 22.9,
+      "private": false,
+      "gated": false,
+      "config_type": "smolvla",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "deca3a8d9378b4c5d2c815be89c3894e6adaa9ba",
+          "size": 2740
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "9e5b07168a79ab1ade0d56e3c88cc071988e4aca",
+          "size": 906712520,
+          "lfs": {
+            "sha256": "1805f76a3d06390f26c221d0601969fb2357390769e5a4fcd75159165c6aa626",
+            "size": 906712520,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "policy_postprocessor.json",
+          "blobId": "81cbf1929298185a7c47eae0eab40c01a77835e3",
+          "size": 661
+        },
+        {
+          "rfilename": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "blobId": "2f2045c4849fcf6561bda7de81d81f500037708f",
+          "size": 13736,
+          "lfs": {
+            "sha256": "3911e0178cc0145b46e35b785078337a0c2ab951bd3220c73b559896f9ded600",
+            "size": 13736,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "policy_preprocessor.json",
+          "blobId": "62f99eb1d7800d47ceba0e55ba0767e4cd0d7452",
+          "size": 2166
+        },
+        {
+          "rfilename": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "blobId": "314348978aced435377c46ca8beeee6cabb80b0e",
+          "size": 13744,
+          "lfs": {
+            "sha256": "fac8d565129437940014e3a26a7b52d9e0eb5fa8aa76d6fc12b880ae94c9207f",
+            "size": 13744,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "7e1b9ab4aba253b6b48ed54c9d4cf1b54f4643a2",
+          "size": 7533
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "drawer_open_place",
+      "policy": "smolvla",
+      "hf_repo_id": "RoboSynChallenge/SmolVLA_sim_drawer_open_place",
+      "hf_revision": "c0088d84a568f93fb4401aabafcc41cf643efcdd",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_drawer_open_place/tree/c0088d84a568f93fb4401aabafcc41cf643efcdd",
+      "local_checkpoint_dir": "checkpoints/SmolVLA_sim_drawer_open_place",
+      "source_success_rate_percent": 62,
+      "source_score": 53.5,
+      "private": false,
+      "gated": false,
+      "config_type": "smolvla",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "deca3a8d9378b4c5d2c815be89c3894e6adaa9ba",
+          "size": 2740
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "452d1c1b3bd3edab8871cf07c1f5ca1ab316b558",
+          "size": 906712520,
+          "lfs": {
+            "sha256": "7db7937d1e322e8e2416778320151d50714ff4ac9b1929061762b77fefb52e13",
+            "size": 906712520,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "policy_postprocessor.json",
+          "blobId": "81cbf1929298185a7c47eae0eab40c01a77835e3",
+          "size": 661
+        },
+        {
+          "rfilename": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "blobId": "3eff08ba7b0e474140148b3218b3fd256a64c72f",
+          "size": 13752,
+          "lfs": {
+            "sha256": "1db91de3b171d94d9997ae9c4d0bf99a3533471d49920edf16bcad2e7df66df7",
+            "size": 13752,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "policy_preprocessor.json",
+          "blobId": "62f99eb1d7800d47ceba0e55ba0767e4cd0d7452",
+          "size": 2166
+        },
+        {
+          "rfilename": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "blobId": "0a61b14e7cd36b57de45783e7773bd4464d8276b",
+          "size": 13760,
+          "lfs": {
+            "sha256": "30bed22013702ae9b24dad27a52f3b9f507d407de4a537dcb12d45ed5feb9087",
+            "size": 13760,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "082236b3b23f90e180b88d00d031bef2bbd7065c",
+          "size": 7545
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "mixer_operating",
+      "policy": "act",
+      "hf_repo_id": "RoboSynChallenge/ACT_sim_mixer_operating",
+      "hf_revision": "0f12c53a2a6e093ae5e1e28f20480296b45fdf2b",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/ACT_sim_mixer_operating/tree/0f12c53a2a6e093ae5e1e28f20480296b45fdf2b",
+      "local_checkpoint_dir": "checkpoints/ACT_sim_mixer_operating",
+      "source_success_rate_percent": 77,
+      "source_score": 65.3,
+      "private": false,
+      "gated": false,
+      "config_type": "act",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "0a5a3fb11766e207370798d3f37986d3714f1829",
+          "size": 2065
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "adbd73d2c7f8bccbab617b0512b55e0c613184af",
+          "size": 206563032,
+          "lfs": {
+            "sha256": "d7b19d76e6a4177ddd5acae1c141a9c53c5585bc9b52ea6bbf55b5ce8780ad97",
+            "size": 206563032,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "b7db2a9e8297dbaf9f765c468b7474327f1b746a",
+          "size": 5486
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "item_assembly",
+      "policy": "act",
+      "hf_repo_id": "RoboSynChallenge/ACT_sim_item_assembly",
+      "hf_revision": "58955958519157176712a1eff319018d78177ddb",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/ACT_sim_item_assembly/tree/58955958519157176712a1eff319018d78177ddb",
+      "local_checkpoint_dir": "checkpoints/ACT_sim_item_assembly",
+      "source_success_rate_percent": 64,
+      "source_score": 51.5,
+      "private": false,
+      "gated": false,
+      "config_type": "act",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "0a5a3fb11766e207370798d3f37986d3714f1829",
+          "size": 2065
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "1dff3b8b440676ad56cc502168d8b8a0e4156fbb",
+          "size": 206563032,
+          "lfs": {
+            "sha256": "69462a12dbb0fe9bee654226ca714778ca5f83e420258456721626befb15bdac",
+            "size": 206563032,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "3a9d052d22609f3a52dddfee0d857efa7868be84",
+          "size": 5472
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "manipulate_pipette",
+      "policy": "act",
+      "hf_repo_id": "RoboSynChallenge/ACT_sim_manipulate_pipette",
+      "hf_revision": "ca013b2e202d594bf347530c61c3ba28c06d1bc2",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/ACT_sim_manipulate_pipette/tree/ca013b2e202d594bf347530c61c3ba28c06d1bc2",
+      "local_checkpoint_dir": "checkpoints/ACT_sim_manipulate_pipette",
+      "source_success_rate_percent": 61,
+      "source_score": 55.0,
+      "private": false,
+      "gated": false,
+      "config_type": "act",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "0a5a3fb11766e207370798d3f37986d3714f1829",
+          "size": 2065
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "3fe0008cffc693f6725e53944525dfb3da0ee5ac",
+          "size": 206563032,
+          "lfs": {
+            "sha256": "d6bcc59b9688e6c6fbb1017ff144ac868fec4bc9800243d6e4b0c2fa2dc4869f",
+            "size": 206563032,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "b292e514624c6d4e80caadfc715706369241974c",
+          "size": 5492
+        }
+      ],
+      "weights_checked": true
+    },
+    {
+      "task": "sample_loading",
+      "policy": "smolvla",
+      "hf_repo_id": "RoboSynChallenge/SmolVLA_sim_sample_loading",
+      "hf_revision": "2a4f41ab3be8e5f544c890d6054bc8de3be5c53b",
+      "hf_url": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_sample_loading/tree/2a4f41ab3be8e5f544c890d6054bc8de3be5c53b",
+      "local_checkpoint_dir": "checkpoints/SmolVLA_sim_sample_loading",
+      "source_success_rate_percent": 6,
+      "source_score": 4.8,
+      "private": false,
+      "gated": false,
+      "config_type": "smolvla",
+      "config_action_steps": 50,
+      "files": [
+        {
+          "rfilename": ".gitattributes",
+          "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+          "size": 1519
+        },
+        {
+          "rfilename": "config.json",
+          "blobId": "deca3a8d9378b4c5d2c815be89c3894e6adaa9ba",
+          "size": 2740
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "eba15669cbce1cb70047eea1e7a5959d1044cff3",
+          "size": 906712520,
+          "lfs": {
+            "sha256": "5faf98300e6d456e1c843b4a052aad540a4ca612f184471d156cbb95b511e359",
+            "size": 906712520,
+            "pointerSize": 134
+          },
+          "head_status": 200
+        },
+        {
+          "rfilename": "policy_postprocessor.json",
+          "blobId": "81cbf1929298185a7c47eae0eab40c01a77835e3",
+          "size": 661
+        },
+        {
+          "rfilename": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "blobId": "409a3680adf6b224503ae83115d1413ede77ed2a",
+          "size": 13728,
+          "lfs": {
+            "sha256": "9ed9a6ba46bf0cc2cceb9dbd3faf26f1325190bed77ad6f99e0b67d526d38108",
+            "size": 13728,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "policy_preprocessor.json",
+          "blobId": "62f99eb1d7800d47ceba0e55ba0767e4cd0d7452",
+          "size": 2166
+        },
+        {
+          "rfilename": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "blobId": "69fbdda44ca526bae26c1121c172aa164bfe7a92",
+          "size": 13736,
+          "lfs": {
+            "sha256": "79d587e4f925bbf0760aac4c445da46a51144c0c0e97425dbf08a54b779fabe7",
+            "size": 13736,
+            "pointerSize": 130
+          }
+        },
+        {
+          "rfilename": "train_config.json",
+          "blobId": "4d14c233ae967b4288e17e4bb28b4a2ca19b7d9c",
+          "size": 7533
+        }
+      ],
+      "weights_checked": true
+    }
+  ],
+  "smolvla_worker": {
+    "python": "3.12",
+    "lerobot_revision": "b9cb121cb7d4e3e26ec5c906d08dda68d151ba52",
+    "verification": "Required processor exports confirmed in pinned source; GPU checkpoint inference not run."
+  }
+}

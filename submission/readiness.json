@@ -1,0 +1,27 @@
+{
+  "prepared_at_utc": "2026-10-12T02:28:51.878049+00:00",
+  "stage": "integrated_locally",
+  "submitted": false,
+  "target_repository": "https://github.com/adarshbaburaj/Robosync_entry",
+  "checkpoint_count": 10,
+  "model_weights_total_bytes": 6443096264,
+  "checks_passed": [
+    "anonymous config downloads at fixed revisions",
+    "anonymous model-file HEAD requests at fixed revisions",
+    "14D action configurations",
+    "ten task command routes",
+    "required adapter and gym files",
+    "shell and Python syntax"
+  ],
+  "unverified": [
+    "GPU checkpoint loading",
+    "GPU simulation rollouts",
+    "complete dependency installation"
+  ],
+  "remaining_inputs": [
+    "registration affiliation and member roster",
+    "organizer access-token approval",
+    "Linux NVIDIA GPU runtime for simulation"
+  ],
+  "graph_integrity_note": "Auxiliary scripts graph has 95 dangling external endpoints and 61 collapsed repeated relationships; source code was inspected directly."
+}

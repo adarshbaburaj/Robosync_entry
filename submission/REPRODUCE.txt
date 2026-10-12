@@ -1,0 +1,95 @@
+RoboSynChallenge submission candidate: official task-specific policy selection
+
+This package reuses the official EDEM-AI/RoboSynChallenge implementation at
+8818c82df5fa2522809b8105e7018950dcc9a9a8 and existing released checkpoints.
+No new model training has been performed. Preserve the upstream Apache-2.0
+LICENSE and credit the organizers. Code licensing does not establish a separate
+license for checkpoint weights. We reference the official public checkpoint
+repositories directly; no checkpoint redistribution is included here.
+
+Task selection uses the highest published score per task on the official
+leaderboard observed October 12, 2026. There are four ACT tasks, five SmolVLA
+tasks, and one Diffusion Policy task. The mean of the selected source success
+rates is 54.5%, compared with 45.3% for the official all-ACT reference. The mean
+selected source score is 46.62, compared with 38.8 for the all-ACT reference.
+These arithmetic comparisons are not fresh evaluation results. Published runs
+and task physics have limitations; held-out competition performance is unknown.
+
+Source: https://robosyn-bench.net/#/leaderboard
+Submission rules: https://robosyn-bench.net/#/faq
+Installation:
+https://edem-ai.github.io/RoboSynChallenge/html/getting_started/installation.html
+Adapter documentation:
+https://edem-ai.github.io/RoboSynChallenge/html/tutorials/policy/your_own_policy.html
+
+Runtime requirements
+--------------------
+Use a supported Linux NVIDIA/CUDA/Vulkan environment. This Apple Silicon Mac
+has not run GPU simulation, model inference, or held-out evaluation.
+Follow the official installation guide for EmbodiChain v0.2.4.post1 and the
+RoboSynChallenge extension. Keep EmbodiChain beside the code repository, or
+set EMBODICHAIN_ROOT to its absolute path. Use Python 3.11 for the locked ACT
+and DP environments.
+
+ACT and DP retain the upstream pyproject.toml and uv.lock files. At the code
+repository root:
+
+  uv sync --frozen --project policy/act
+  uv sync --frozen --project policy/dp
+
+Both lock LeRobot to b883328e6c95681ca90a18b102e4ae5e1f91e2bf (v0.3.3).
+That version does not export the processor functions used by the official
+SmolVLA worker. Keep the ACT/DP lock unchanged and use a separate Python 3.12
+SmolVLA worker environment with LeRobot pinned to
+b9cb121cb7d4e3e26ec5c906d08dda68d151ba52. Source inspection confirms that revision
+exports all five required processor symbols. This is an API check, not a
+successful model-loading test. Full runtime compatibility remains to be tested.
+
+  bash submission/setup_smolvla_worker.sh
+
+This installs the pinned worker into policy/smolvla/.venv-worker using uv.
+Activate the simulator environment separately. For the worker:
+
+  export SMOLVLA_PYTHON="$PWD/policy/smolvla/.venv-worker/bin/python"
+
+Do not override SMOLVLA_LEROBOT_ROOT to an older LeRobot checkout.
+
+Set PYTHON_BIN to the absolute simulator Python path for SmolVLA and set
+SMOLVLA_PYTHON to the absolute worker Python path when using separate environments.
+The official SmolVLA wrapper keeps the simulator GPU unmasked and controls the
+worker GPU separately; use its fourth positional GPU argument.
+
+Download and run
+----------------
+The organizer can download every checkpoint without a participant token.
+selected_checkpoints.json records the pinned Hugging Face revision and all
+files advertised by each repository. Checkpoint weights remain hosted upstream.
+
+  python3 submission/run_selected.py list
+  python3 submission/run_selected.py download all --dry-run
+  python3 submission/run_selected.py download all
+
+After installing and activating the corresponding official policy environment,
+run one task at a time, e.g.:
+
+  python3 submission/run_selected.py run click_bell --episodes 1
+  python3 submission/run_selected.py run table_rearrangement --episodes 1
+
+Use --episodes 20 (the default) or the episode count requested by the organizers
+for the actual evaluation. Additional upstream policy overrides can be supplied
+as --key value pairs. Public random runs are local development checks; the
+organizers supply their held-out protocol. No scene parameters are modified.
+
+Submission status
+-----------------
+This is a prepared local candidate, not a submitted entry. The user's target
+repository URL/path and a signed-in registered team account are still required.
+Before submission, run smoke evaluations on Linux with NVIDIA GPU, verify all
+ten checkpoint loads and episode resets, push all code before the cutoff, and
+confirm the one request covers all ten tasks. Declare this entry as reuse of
+official pretrained policies with task-specific selection; do not describe the
+upstream training or benchmark numbers as the submitting team's own results.
+
+The official cutoff is October 11, 2026 23:59 AoE, equivalent to October 12,
+2026 15:59 Asia/Dubai. Submit and verify acceptance before 15:30 Dubai to allow
+time for access checks and corrections.
