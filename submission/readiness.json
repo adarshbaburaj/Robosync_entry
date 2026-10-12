@@ -1,7 +1,7 @@
 {
   "prepared_at_utc": "2026-10-12T02:28:51.878049+00:00",
-  "stage": "ready_to_submit",
-  "submitted": false,
+  "stage": "submitted_pending_assignment",
+  "submitted": true,
   "target_repository": "https://github.com/adarshbaburaj/Robosync_entry",
   "checkpoint_count": 10,
   "model_weights_total_bytes": 6443096264,
@@ -20,14 +20,17 @@
     "NVIDIA GPU simulation rollouts",
     "official held-out evaluation"
   ],
-  "remaining_inputs": [
-    "Linux NVIDIA GPU runtime for simulation"
-  ],
+  "remaining_inputs": [],
   "graph_integrity_note": "Auxiliary scripts graph has 95 dangling external endpoints and 61 collapsed repeated relationships; source code was inspected directly.",
   "registration": {
     "status": "approved_and_signed_in",
     "team_name": "Robosync_entry",
     "member": "Adarsh Baburaj",
     "affiliation": "Independent"
-  }
+  },
+  "submission_id": "sub_e7b77da6cf6f4b",
+  "submission_url": "https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b",
+  "pending_external_work": [
+    "organizer assignment and held-out evaluation"
+  ]
 }

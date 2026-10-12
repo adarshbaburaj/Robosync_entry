@@ -82,11 +82,11 @@ organizers supply their held-out protocol. No scene parameters are modified.
 
 Submission status
 -----------------
-This is a prepared local candidate, not a submitted entry. The target repository is https://github.com/adarshbaburaj/Robosync_entry and the
+The entry was submitted as sub_e7b77da6cf6f4b and is pending organizer assignment. The target repository is https://github.com/adarshbaburaj/Robosync_entry and the
 registered solo account has been approved and signed in.
-Before submission, run smoke evaluations on Linux with NVIDIA GPU, verify all
-ten checkpoint loads and episode resets, push all code before the cutoff, and
-confirm the one request covers all ten tasks. Declare this entry as reuse of
+All ten checkpoint loads and model reset calls passed CPU compatibility checks,
+and code was pushed before the cutoff. The recorded request covers all ten
+tasks. NVIDIA simulator rollouts remain to be checked during organizer evaluation. Declare this entry as reuse of
 official pretrained policies with task-specific selection; do not describe the
 upstream training or benchmark numbers as the submitting team's own results.
 

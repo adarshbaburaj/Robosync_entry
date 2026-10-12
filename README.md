@@ -2,7 +2,7 @@
 
 RoboSynChallenge preliminary entry prepared by Adarsh Baburaj. This repository reuses official pretrained policies and selects a policy per task from published reference results. No new training is claimed.
 
-**Preparation status:** all ten pinned checkpoints downloaded, loaded with strict weight matching, produced finite 14D actions on CPU, and reset successfully. The actual SmolVLA worker reset/inference RPC also passed. See [validation results](submission/validation_results.json). The solo participant account has been approved. NVIDIA simulation and official held-out evaluation remain untested; portal submission is being completed.
+**Submission status:** submitted for ranked preliminary evaluation as [`sub_e7b77da6cf6f4b`](https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b), with portal status **Submitted** and stage **Pending assignment**. See [receipt](submission/submission_receipt.json). All ten checkpoints passed strict CPU weight loading, finite 14D synthetic inference, and reset checks; the actual SmolVLA worker RPC also passed. [Validation results](submission/validation_results.json). NVIDIA simulation and official held-out evaluation remain untested.
 
 ## Reproduce
 

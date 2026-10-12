@@ -1,0 +1,19 @@
+{
+  "submission_id": "sub_e7b77da6cf6f4b",
+  "submission_url": "https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b",
+  "artifact_name": "robosync-official-selection-v1",
+  "experiment_name": "prelim-20261012-mixed",
+  "team_name": "Robosync_entry",
+  "member": "Adarsh Baburaj",
+  "affiliation": "Independent",
+  "confirmed_at_utc": "2026-10-12T04:33:01.570345+00:00",
+  "confirmed_at_dubai": "2026-10-12T08:33:01.570345+04:00",
+  "portal_status": "Submitted",
+  "evaluation_stage": "Pending assignment",
+  "run_type": "Ranked",
+  "portal_confirmation": "Artifact submission recorded. The organizers can now schedule and publish it.",
+  "code_url": "https://github.com/adarshbaburaj/Robosync_entry",
+  "code_commit_at_submission": "d6592bb14423c547fdd0b0787e428003f2687b4d",
+  "task_count": 10,
+  "validation": "Ten strict CPU synthetic model probes and SmolVLA worker RPC passed. NVIDIA simulation and official held-out evaluation remain untested."
+}
