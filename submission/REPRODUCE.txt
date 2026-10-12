@@ -93,3 +93,15 @@ upstream training or benchmark numbers as the submitting team's own results.
 The official cutoff is October 11, 2026 23:59 AoE, equivalent to October 12,
 2026 15:59 Asia/Dubai. Submit and verify acceptance before 15:30 Dubai to allow
 time for access checks and corrections.
+
+CPU compatibility probes
+------------------------
+Use submission/probe_checkpoint.py in the corresponding policy environment to
+load a pinned checkpoint, run one synthetic observation, check finite [1, 14]
+actions, and call reset. This does not measure simulated task success. Example:
+
+  python submission/probe_checkpoint.py click_bell --device cpu
+
+The CPU dependency probe requires the lock-compatible NumPy/PyArrow pairing.
+Resolving the latest PyArrow against NumPy <2 can fail; use the existing ACT/DP
+lock files for the simulation environments. SmolVLA uses the separate worker.
