@@ -13,7 +13,8 @@
     "SmolVLA actual reset and inference RPC",
     "ten task command routes",
     "required adapter and gym files",
-    "shell/Python syntax"
+    "shell/Python syntax",
+    "package metadata build with case-correct root VERSION"
   ],
   "unverified": [
     "NVIDIA GPU simulation rollouts",

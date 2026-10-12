@@ -185,5 +185,10 @@
     "lerobot": "0.6.2",
     "torch": "2.11.0",
     "transformers": "5.5.4"
+  },
+  "packaging_metadata": {
+    "version": "0.0.1",
+    "root_version_file": "VERSION",
+    "metadata_build_passed": true
   }
 }

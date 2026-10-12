@@ -35,6 +35,7 @@ where = ["."]
 exclude = ["docs"]
 
 [tool.setuptools.dynamic]
-version = { file = ["RoboSynChallenge/VERSION"] }
+# Robosync_entry: use the actual root file on case-sensitive Linux filesystems.
+version = { file = ["VERSION"] }
 
 [tool.black]
