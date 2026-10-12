@@ -1,33 +1,30 @@
 {
   "prepared_at_utc": "2026-10-12T02:28:51.878049+00:00",
-  "stage": "published_on_github_pending_account_approval",
+  "stage": "ready_to_submit",
   "submitted": false,
   "target_repository": "https://github.com/adarshbaburaj/Robosync_entry",
   "checkpoint_count": 10,
   "model_weights_total_bytes": 6443096264,
   "checks_passed": [
-    "anonymous config downloads at fixed revisions",
-    "anonymous model-file HEAD requests at fixed revisions",
-    "14D action configurations",
+    "ten anonymous pinned checkpoint downloads",
+    "ten strict checkpoint weight matches",
+    "ten finite 14D CPU synthetic inference outputs",
+    "ten model reset calls",
+    "SmolVLA actual reset and inference RPC",
     "ten task command routes",
     "required adapter and gym files",
-    "shell and Python syntax",
-    "ACT/DP runtime imports",
-    "SmolVLA runtime imports",
-    "click_bell synthetic CPU inference"
+    "shell/Python syntax"
   ],
   "unverified": [
-    "GPU checkpoint loading",
-    "GPU simulation rollouts",
-    "complete dependency installation"
+    "NVIDIA GPU simulation rollouts",
+    "official held-out evaluation"
   ],
   "remaining_inputs": [
-    "organizer access-token approval",
     "Linux NVIDIA GPU runtime for simulation"
   ],
   "graph_integrity_note": "Auxiliary scripts graph has 95 dangling external endpoints and 61 collapsed repeated relationships; source code was inspected directly.",
   "registration": {
-    "status": "access_request_sent_pending_organizer_review",
+    "status": "approved_and_signed_in",
     "team_name": "Robosync_entry",
     "member": "Adarsh Baburaj",
     "affiliation": "Independent"

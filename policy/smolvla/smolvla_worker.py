@@ -12,6 +12,25 @@ import numpy as np
 import torch
 
 
+def load_pinned_policy(checkpoint_dir: str, device: str):
+    """Robosync_entry: load the complete policy with an immutable VLM dependency."""
+    from huggingface_hub import snapshot_download
+    from lerobot.configs.policies import PreTrainedConfig
+    from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
+
+    config = PreTrainedConfig.from_pretrained(
+        checkpoint_dir, cli_overrides=[f"--device={device}"]
+    )
+    if config.vlm_model_name == "HuggingFaceTB/SmolVLM2-500M-Video-Instruct":
+        config.vlm_model_name = snapshot_download(
+            repo_id="HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+            revision="7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+            ignore_patterns=["onnx/*"],
+            token=False,
+        )
+    return SmolVLAPolicy.from_pretrained(checkpoint_dir, config=config, strict=True)
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkpoint-dir", required=True)
@@ -32,7 +51,6 @@ def _load_runtime(args: argparse.Namespace):
             )
 
     try:
-        from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
         from lerobot.processor import (
             PolicyProcessorPipeline,
             batch_to_transition,
@@ -47,7 +65,9 @@ def _load_runtime(args: argparse.Namespace):
         ) from exc
 
     checkpoint_dir = str(Path(args.checkpoint_dir).resolve())
-    policy = SmolVLAPolicy.from_pretrained(checkpoint_dir)
+    # Robosync_entry: honor the requested runtime device when loading and reject
+    # incomplete/incompatible checkpoint weights instead of permissive loading.
+    policy = load_pinned_policy(checkpoint_dir, args.device)
     policy.to(args.device)
     policy.eval()
 

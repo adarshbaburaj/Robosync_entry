@@ -26,6 +26,7 @@ def get_model(usr_args):
         policy = ACTPolicy.from_pretrained(
             checkpoint_path,
             cli_overrides=cli_overrides,
+            strict=True,  # Robosync_entry: require a complete matching checkpoint.
         )
     except TypeError as exc:
         if "cli_overrides" not in str(exc):
@@ -34,7 +35,7 @@ def get_model(usr_args):
             checkpoint_path,
             cli_overrides=cli_overrides,
         )
-        policy = ACTPolicy.from_pretrained(checkpoint_path, config=config)
+        policy = ACTPolicy.from_pretrained(checkpoint_path, config=config, strict=True)
     policy.eval()
 
     image_key_map = {

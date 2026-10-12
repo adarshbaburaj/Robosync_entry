@@ -42,16 +42,13 @@ def main():
         model = adapter.get_model({"checkpoint_path": str(checkpoint),
                                    "device": args.device, "dp_num_inference_steps": 10})
     else:
-        from lerobot.configs.policies import PreTrainedConfig
-        from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy
+        from policy.smolvla.smolvla_worker import load_pinned_policy
         from lerobot.processor import (
             PolicyProcessorPipeline, batch_to_transition, policy_action_to_transition,
             transition_to_batch, transition_to_policy_action,
         )
 
-        config = PreTrainedConfig.from_pretrained(str(checkpoint),
-                                                cli_overrides=[f"--device={args.device}"])
-        model = SmolVLAPolicy.from_pretrained(str(checkpoint), config=config, strict=True)
+        model = load_pinned_policy(str(checkpoint), args.device)
         preprocessor = PolicyProcessorPipeline.from_pretrained(
             str(checkpoint), config_filename="policy_preprocessor.json",
             overrides={"device_processor": {"device": args.device}},

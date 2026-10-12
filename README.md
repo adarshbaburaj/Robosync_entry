@@ -2,7 +2,7 @@
 
 RoboSynChallenge preliminary entry prepared by Adarsh Baburaj. This repository reuses official pretrained policies and selects a policy per task from published reference results. No new training is claimed.
 
-**Preparation status:** all ten public checkpoint revisions and command routes verified. CPU model smoke tests are in progress. Linux NVIDIA simulation and official held-out evaluation have not run. The competition submission is pending account registration and organizer approval.
+**Preparation status:** all ten pinned checkpoints downloaded, loaded with strict weight matching, produced finite 14D actions on CPU, and reset successfully. The actual SmolVLA worker reset/inference RPC also passed. See [validation results](submission/validation_results.json). The solo participant account has been approved. NVIDIA simulation and official held-out evaluation remain untested; portal submission is being completed.
 
 ## Reproduce
 

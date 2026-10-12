@@ -1,0 +1,189 @@
+{
+  "checked_at_utc": "2026-10-12T04:24:15.370498+00:00",
+  "scope": "CPU synthetic model inference and SmolVLA worker RPC. No NVIDIA simulator rollout or task success-rate evaluation.",
+  "platform": "Apple Silicon macOS, CPU device",
+  "policy_results": [
+    {
+      "task": "click_bell",
+      "policy": "dp",
+      "hf_revision": "fb8c9551e0fade7c4888a926ab577b85f0684da1",
+      "device": "cpu",
+      "model_load_seconds": 6.013060625002254,
+      "synthetic_action_seconds": 2.553198416993837,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "table_rearrangement",
+      "policy": "smolvla",
+      "hf_revision": "913b29a7136876108a330aead1855309f985cbd8",
+      "device": "cpu",
+      "model_load_seconds": 10.396477165995748,
+      "synthetic_action_seconds": 17.30229724998935,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "water_pouring",
+      "policy": "act",
+      "hf_revision": "0bf0fcfc931a69c52871385f28068fcf873cf07a",
+      "device": "cpu",
+      "model_load_seconds": 3.141007417012588,
+      "synthetic_action_seconds": 0.30306987500807736,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "handle_basket",
+      "policy": "smolvla",
+      "hf_revision": "0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+      "device": "cpu",
+      "model_load_seconds": 8.680733707995387,
+      "synthetic_action_seconds": 17.38821299999836,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "items_handover",
+      "policy": "smolvla",
+      "hf_revision": "fabe9462853965228e90e34bd517aa4e43bad323",
+      "device": "cpu",
+      "model_load_seconds": 9.763537957987865,
+      "synthetic_action_seconds": 17.16912766698806,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "drawer_open_place",
+      "policy": "smolvla",
+      "hf_revision": "c0088d84a568f93fb4401aabafcc41cf643efcdd",
+      "device": "cpu",
+      "model_load_seconds": 8.948953416998847,
+      "synthetic_action_seconds": 20.976538957998855,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "mixer_operating",
+      "policy": "act",
+      "hf_revision": "0f12c53a2a6e093ae5e1e28f20480296b45fdf2b",
+      "device": "cpu",
+      "model_load_seconds": 2.9001548749947688,
+      "synthetic_action_seconds": 0.28158529099891894,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "item_assembly",
+      "policy": "act",
+      "hf_revision": "58955958519157176712a1eff319018d78177ddb",
+      "device": "cpu",
+      "model_load_seconds": 2.8431565829960164,
+      "synthetic_action_seconds": 0.2459592090017395,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "manipulate_pipette",
+      "policy": "act",
+      "hf_revision": "ca013b2e202d594bf347530c61c3ba28c06d1bc2",
+      "device": "cpu",
+      "model_load_seconds": 3.3477192080026725,
+      "synthetic_action_seconds": 0.3989011660014512,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    },
+    {
+      "task": "sample_loading",
+      "policy": "smolvla",
+      "hf_revision": "2a4f41ab3be8e5f544c890d6054bc8de3be5c53b",
+      "device": "cpu",
+      "model_load_seconds": 14.862656916986452,
+      "synthetic_action_seconds": 17.861193415999878,
+      "action_shape": [
+        1,
+        14
+      ],
+      "finite_actions": true,
+      "strict_weight_match": true,
+      "reset_called": true,
+      "test_scope": "Synthetic model inference only; no simulation or success rate."
+    }
+  ],
+  "smolvla_rpc": {
+    "task": "table_rearrangement",
+    "test_scope": "Actual SmolVLA worker RPC with synthetic observations; no simulation.",
+    "reset_rpc_passed": true,
+    "inference_rpc_passed": true,
+    "action_shape": [
+      14
+    ]
+  },
+  "actdp_runtime": {
+    "python": "3.11",
+    "lerobot": "0.3.3",
+    "torch": "2.7.1",
+    "numpy": "1.26.4",
+    "pyarrow": "24.0.0"
+  },
+  "smolvla_runtime": {
+    "python": "3.12",
+    "lerobot": "0.6.2",
+    "torch": "2.11.0",
+    "transformers": "5.5.4"
+  }
+}

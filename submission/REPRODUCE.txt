@@ -41,9 +41,9 @@ Both lock LeRobot to b883328e6c95681ca90a18b102e4ae5e1f91e2bf (v0.3.3).
 That version does not export the processor functions used by the official
 SmolVLA worker. Keep the ACT/DP lock unchanged and use a separate Python 3.12
 SmolVLA worker environment with LeRobot pinned to
-b9cb121cb7d4e3e26ec5c906d08dda68d151ba52. Source inspection confirms that revision
-exports all five required processor symbols. This is an API check, not a
-successful model-loading test. Full runtime compatibility remains to be tested.
+b9cb121cb7d4e3e26ec5c906d08dda68d151ba52. That revision exports all five required processor symbols and has passed
+CPU model loading and synthetic inference checks. NVIDIA simulation remains
+untested.
 
   bash submission/setup_smolvla_worker.sh
 
@@ -82,8 +82,8 @@ organizers supply their held-out protocol. No scene parameters are modified.
 
 Submission status
 -----------------
-This is a prepared local candidate, not a submitted entry. The user's target
-repository URL/path and a signed-in registered team account are still required.
+This is a prepared local candidate, not a submitted entry. The target repository is https://github.com/adarshbaburaj/Robosync_entry and the
+registered solo account has been approved and signed in.
 Before submission, run smoke evaluations on Linux with NVIDIA GPU, verify all
 ten checkpoint loads and episode resets, push all code before the cutoff, and
 confirm the one request covers all ten tasks. Declare this entry as reuse of
@@ -105,3 +105,25 @@ actions, and call reset. This does not measure simulated task success. Example:
 The CPU dependency probe requires the lock-compatible NumPy/PyArrow pairing.
 Resolving the latest PyArrow against NumPy <2 can fail; use the existing ACT/DP
 lock files for the simulation environments. SmolVLA uses the separate worker.
+
+SmolVLA base dependency is pinned to
+HuggingFaceTB/SmolVLM2-500M-Video-Instruct at
+7b375e1b73b11138ff12fe22c8f2822d8fe03467. The worker downloads that fixed snapshot
+into the normal Hugging Face cache and uses its local path. This preserves the
+base configuration and tokenizer used by the CPU probe and avoids moving-main
+base-model changes. All selected policy weights are then loaded strictly.
+
+Validated CPU results are in submission/validation_results.json.
+All ten policies passed strict weight loading, finite 14D synthetic actions,
+and reset checks; the actual SmolVLA worker RPC also passed.
+
+For the Linux RTX 5090 environment, after uv sync --frozen for ACT and DP, run:
+
+  bash submission/setup_actdp_cuda.sh
+
+This selects PyTorch 2.7.1+cu128 and torchvision 0.22.1+cu128. Their CUDA 12.8
+wheels are published by PyTorch and match the public RTX 5090 protocol.
+The SmolVLA worker setup pins torch 2.11.0, torchvision 0.26.0, and transformers
+5.5.4, matching the tested CPU runtime. On Linux it selects their CUDA 12.8
+Torch/Torchvision builds. Use a driver compatible with CUDA 12.8.
+GPU wheel availability was checked; GPU runtime itself was not tested here.

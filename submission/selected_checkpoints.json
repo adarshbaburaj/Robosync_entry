@@ -591,6 +591,10 @@
   "smolvla_worker": {
     "python": "3.12",
     "lerobot_revision": "b9cb121cb7d4e3e26ec5c906d08dda68d151ba52",
-    "verification": "Required processor exports confirmed in pinned source; GPU checkpoint inference not run."
+    "verification": "Required processor exports confirmed in pinned source; GPU checkpoint inference not run.",
+    "vlm_base": {
+      "repo_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+    }
   }
 }
