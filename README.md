@@ -8,7 +8,7 @@ Original ranked entry: [`sub_e7b77da6cf6f4b`](https://robosyn-bench.net/#/submis
 
 ## Reproduce
 
-**Correction 2:** the organizer confirmed correction 1 passed the byte-image blocker, then found that the SmolVLA adapter returned three values where the evaluator requires four. See [return/timing correction](submission/SMOLVLA_ADAPTER_CORRECTION.txt) and [evaluator-facing validation](submission/smolvla_adapter_validation.json). The adapter now returns genuine timings via the official helper, excludes cached-only calls and environment stepping from inference timing, and stops on episode completion. Official frozen GPU reevaluation is still required.
+**Correction 2:** the organizer confirmed correction 1 passed the byte-image blocker, then found that the SmolVLA adapter returned three values where the evaluator requires four. See [return/timing correction](submission/SMOLVLA_ADAPTER_CORRECTION.txt) and [evaluator-facing validation](submission/smolvla_adapter_validation.json). The adapter now returns genuine timings via the official helper, excludes cached-only calls and environment stepping from inference timing, and stops on episode completion. Correction 2 was recorded through the latest official response form with all ten checkpoint URLs; see [receipt](submission/smolvla_adapter_correction_receipt.json). Official frozen GPU reevaluation is still required.
 
 Use [submission/REPRODUCE.txt](submission/REPRODUCE.txt) for the simulator and separate policy environments. The checkpoint manifest is [submission/selected_checkpoints.json](submission/selected_checkpoints.json).
 
