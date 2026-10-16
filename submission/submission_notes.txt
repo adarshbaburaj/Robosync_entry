@@ -1,3 +1,8 @@
+Historical original submission notes (October 12, 2026), retained for audit.
+For the current supported runtime and evaluator contract, follow
+submission/REPRODUCE.txt and submission/SMOLVLA_ADAPTER_CORRECTION.txt.
+Dependency pins and code references below describe the original submission.
+
 Submitted: https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b
 Status at receipt: Submitted; Pending assignment; Ranked.
 

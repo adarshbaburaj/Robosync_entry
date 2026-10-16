@@ -32,5 +32,7 @@
   "submission_url": "https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b",
   "pending_external_work": [
     "organizer assignment and held-out evaluation"
-  ]
+  ],
+  "historical_scope": "Original October 12 readiness checks; float-only probes missed the image contract, and worker-only probes missed the adapter return contract. See correction 2 documentation and evaluator-facing evidence.",
+  "latest_correction_document": "submission/SMOLVLA_ADAPTER_CORRECTION.txt"
 }

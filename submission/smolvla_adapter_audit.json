@@ -1,0 +1,30 @@
+{
+  "evaluation_id": "eval_412bc052c68847",
+  "previous_participant_commit": "8a566c399b767e559d8e3dfd5769010cb480f172",
+  "previous_organizer_frozen_bundle": "adc353484b17f00530c06f550ec394cd2cfb7f41",
+  "regression_command": "python -m unittest submission.test_smolvla_images submission.test_smolvla_adapter -v",
+  "regression_tests_passed": 11,
+  "evaluator_probe_command": "python submission/probe_smolvla_evaluator.py all --device cpu --output submission/smolvla_adapter_validation.json",
+  "evaluator_probe_results": "submission/smolvla_adapter_validation.json",
+  "real_checkpoint_count": 5,
+  "controlled_fixture_episode_count": 10,
+  "four_value_adapter_calls": 40,
+  "real_model_refills": 15,
+  "cached_only_calls": 25,
+  "controlled_environment_steps": 315,
+  "unchanged_from_previous_correction": [
+    "policy/inference_timing.py",
+    "scripts/eval_policy.py",
+    "policy/act",
+    "policy/dp",
+    "submission/selected_checkpoints.json"
+  ],
+  "source_sha256": {
+    "policy/smolvla/deploy_policy.py": "99403f8ccc08b07cf51b72e3440840a16afbf7e270bcac69da45fb2ae28a0c37",
+    "policy/smolvla/smolvla_worker.py": "bad15914e3b9724d671fee849c69fcaea244336ad3e75e68b9cdb088d03393ec",
+    "policy/inference_timing.py": "081e00a1ce6150838f5b57aa5753e78db7062d7d82dd6048cf4de11f671e4fbd",
+    "scripts/eval_policy.py": "09e727d416aedec843b481246adc810f528470080f8db3a4efc4937e6c156c45"
+  },
+  "syntax_checks": "Python compile and bash -n passed; git diff --check passed.",
+  "scope_limit": "CPU contract testing with real checkpoints and controlled Gym environment; no EmbodiChain physics, external official run_evaluation.py, NVIDIA GPU or held-out seed packet."
+}

@@ -11,6 +11,9 @@ from pathlib import Path
 import numpy as np
 import torch
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from policy.inference_timing import finish_inference, start_inference
+
 
 def load_pinned_policy(checkpoint_dir: str, device: str):
     """Robosync_entry: load the complete policy with an immutable VLM dependency."""
@@ -146,18 +149,30 @@ def main() -> int:
                 raise ValueError(f"Unsupported command: {cmd}")
 
             with contextlib.redirect_stdout(sys.stderr):
+                num_actions = int(request.get("n_action_steps", 1))
+                if not 1 <= num_actions <= policy.config.n_action_steps:
+                    raise ValueError("n_action_steps must be between 1 and the checkpoint's n_action_steps")
+                # At most one real queue refill can occur within this request.
+                # Synchronize the worker's own CUDA device, whose ordinal may
+                # differ from the simulator parent's CUDA_VISIBLE_DEVICES.
+                started_at = start_inference(args.device)
                 obs, task = _load_obs(request["obs_path"])
                 obs = prepare_observation(obs, task)
                 proc_obs = preprocessor(obs)
 
-                num_actions = int(request.get("n_action_steps", 1))
                 actions = []
+                inference_count = 0
                 for _ in range(num_actions):
+                    inference_count += int(policy._check_get_actions_condition())
                     action = policy.select_action(proc_obs)
                     action = postprocessor(action)
                     actions.append(action.squeeze(0).cpu().numpy().astype(np.float32).tolist())
+                inference_times_s = []
+                if inference_count:
+                    finish_inference(started_at, inference_times_s, args.device)
 
-            _send({"ok": True, "actions": actions})
+            _send({"ok": True, "actions": actions,
+                   "inference_times_s": inference_times_s})
         except Exception as exc:  # noqa: BLE001
             _send({"ok": False, "error": f"{type(exc).__name__}: {exc}"})
 

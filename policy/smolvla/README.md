@@ -1,5 +1,11 @@
 # SmolVLA
 
+For this competition entry, use the pinned runtime and corrected adapter
+contract in [submission/REPRODUCE.txt](../../submission/REPRODUCE.txt) and
+[SMOLVLA_ADAPTER_CORRECTION.txt](../../submission/SMOLVLA_ADAPTER_CORRECTION.txt).
+The general upstream setup examples below are retained for reference; they
+are not the supported dependency pins for the frozen submission.
+
 This folder adds SmolVLA finetuning and evaluation support to
 RoboSynChallenge.
 

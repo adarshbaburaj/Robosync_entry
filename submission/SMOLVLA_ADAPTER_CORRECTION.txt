@@ -1,0 +1,115 @@
+Correction 2: SmolVLA evaluator return and timing contract
+Evaluation: eval_412bc052c68847
+Previous correction: 8a566c399b767e559d8e3dfd5769010cb480f172
+Organizer's previous frozen bundle: adc353484b17f00530c06f550ec394cd2cfb7f41
+
+The image conversion from correction 1 is retained. The organizer confirmed
+that it passed input-contract checks and production passed the Byte resize
+blocker. The next exception was a distinct adapter integration failure:
+the evaluator unpacks four values, but SmolVLA returned only three. Actions
+could execute before the exception; neither the exception nor its cleanup
+video establishes a completed/scorable episode or policy-success judgment.
+
+Compatible return contract
+--------------------------
+policy.smolvla.eval(env, model, obs) now returns exactly:
+    (final_obs, info, truncated, inference_times_s)
+info and truncated are the original values returned by the environment.
+The adapter stops its action loop at success, truncation or termination so
+it does not continue executing queued actions beyond an episode boundary.
+This matches the success/timeout handling expected by scripts/eval_policy.py.
+
+Genuine timing and cache handling
+--------------------------------
+The shared official policy/inference_timing.py is used without modification.
+Its start_inference/finish_inference functions synchronize a supplied CUDA
+device and use time.perf_counter(). No fixed, zero, estimated or synthesized
+latency is submitted to the evaluator.
+
+The worker uses these functions on its own requested device. It inspects
+the pinned LeRobot policy's real _check_get_actions_condition() before each
+select_action to detect action-queue refills. Cached-only requests return an
+empty inference_times_s list. Requests performing real model inference return
+one measured worker timing sample. n_action_steps is validated in [1, the
+checkpoint's n_action_steps], so there can be at most one refill per request.
+All five selected checkpoints have n_action_steps=50; smolvla_steps stays 10.
+
+The parent uses the same official functions to measure the evaluator's full
+scope: raw observation encoding, NPZ serialization/transport, worker processing,
+model inference, saved postprocessor, returned actions and executable action
+tensor conversion. It synchronizes the simulator device; the blocking worker
+reply follows worker-device synchronization and CPU action materialization.
+The parent finishes timing BEFORE env.step or diagnostic printing. This avoids
+confusing the worker's masked GPU ordinal with the parent's physical GPU.
+
+Exactly one original parent wall-clock sample is returned for a request with
+a real refill, and [] for a cached-only request. Parent and worker durations
+are independently measured and are never added, divided, or substituted with
+constants. Worker timings remain available as last_inference_times_s for audit;
+the fourth evaluator return contains the full parent scope. As before, each
+request returns up to ten actions; model/action chunking itself is unchanged.
+Action dimension/finiteness and timing protocol are validated before env.step.
+Episode reset clears both the model queue and client timing metadata.
+
+Runtime and checkpoint provenance
+---------------------------------
+Use the same supported runtime as correction 1:
+Python 3.12 (tested 3.12.10)
+LeRobot 146d8474932c8b566717eb2738ba459337ab71c4
+PyTorch 2.7.1; Linux CUDA 2.7.1+cu128
+torchvision 0.22.1; Linux CUDA 0.22.1+cu128
+transformers 5.5.4
+    bash submission/setup_smolvla_worker.sh
+    export SMOLVLA_PYTHON="$PWD/policy/smolvla/.venv-worker/bin/python"
+Set PYTHON_BIN to the official simulator environment's Python when launching
+policy/smolvla/eval.sh. Retain the full setup in submission/REPRODUCE.txt and
+the constraints in submission/smolvla_runtime_constraints.txt. The worker's
+repository-root import path now explicitly exposes the shared timing module.
+
+All TEN checkpoint URLs/revisions are unchanged in selected_checkpoints.json
+and listed in SMOLVLA_CORRECTION.txt. ACT/DP code, locks, checkpoints and the
+shared timing module are unchanged. The VLM base revision remains pinned to
+7b375e1b73b11138ff12fe22c8f2822d8fe03467. No training, model weights, task seeds,
+physical task configuration, success criteria or official evaluator is changed.
+
+Broader validation
+-----------------
+    python -m unittest submission.test_smolvla_images \
+      submission.test_smolvla_adapter -v
+    python submission/probe_smolvla_evaluator.py all --device cpu \
+      --output submission/smolvla_adapter_validation.json
+
+The regression suite checks the previous image bug, four-value return, timing
+boundary before env.step, real official timer behavior, CUDA synchronization
+calls (mocked; no GPU here), empty timings for cache hits, success/timeout/
+termination stops, invalid actions/timings, invalid step counts, and actual
+bash eval.sh task/checkpoint/worker/GPU routing for all five SmolVLA tasks.
+
+The broader probe uses every real selected SmolVLA checkpoint and subprocess
+worker with torch-backed, batched RGBA uint8 camera and robot observations.
+It compiles the repository evaluator's functions unchanged from source to
+avoid importing unavailable EmbodiChain on macOS. The actual argument parser,
+adapter loader, instruction lookup, episode/reset loop, recording proxy,
+timing accumulation, metrics schema/JSON writer and environment cleanup run.
+Simulator construction and video encoding are controlled fixtures; expert
+feasibility is disabled only in this test. The real evaluator source and
+production launcher are not patched.
+
+Each task runs two fixture episodes: a timeout at 61 actions crossing a
+50-action model queue boundary, then a reset and success signal at action 2.
+The expected eight adapter calls have timing-list lengths [1,0,0,0,0,1,0,1]:
+three real model refills, five cached-only calls, no extra actions after done,
+and completed metrics JSON/recording cleanup. Both parent and worker samples
+are saved in smolvla_adapter_validation.json. Fixture outcomes are assertions
+about control flow, not robot task-success results or competition scores.
+
+Limits: this host has no NVIDIA GPU or EmbodiChain physics runtime. The local
+probe does not run the organizer's external run_evaluation.py wrapper, its
+frozen bundle, held-out seed packet or real video encoder. Those still require
+the official frozen GPU evaluation. No claim that all possible errors or
+official evaluation have been eliminated is made.
+
+Submit this immutable full GitHub commit and ALL TEN unchanged checkpoint
+URLs through the latest issue email's official response form. Prior evidence
+remains an organizer audit record; displayed-result supersession follows their
+backend workflow. Never submit a private/local patch or a moving branch URL.

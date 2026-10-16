@@ -1,0 +1,344 @@
+{
+  "evaluation": "eval_412bc052c68847",
+  "device": "cpu",
+  "python": "3.12.10",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "torch": "2.7.1",
+  "transformers": "5.5.4",
+  "lerobot_source": {
+    "url": "https://github.com/huggingface/lerobot.git",
+    "vcs_info": {
+      "vcs": "git",
+      "commit_id": "146d8474932c8b566717eb2738ba459337ab71c4",
+      "requested_revision": "146d8474932c8b566717eb2738ba459337ab71c4"
+    }
+  },
+  "test_scope": "Unchanged local evaluator functions and real checkpoints/workers with a controlled Gym fixture. No physics, official run_evaluation.py, held-out seeds or task-success evaluation.",
+  "results": [
+    {
+      "task": "table_rearrangement",
+      "hf_revision": "913b29a7136876108a330aead1855309f985cbd8",
+      "fixture_episodes_completed": 2,
+      "fixture_env_steps": 63,
+      "four_value_adapter_calls": 8,
+      "actual_model_refills": 3,
+      "cached_only_adapter_calls": 5,
+      "calls": [
+        {
+          "elapsed_steps": 10,
+          "new_times": [
+            17.78223633300513
+          ],
+          "worker_times": [
+            17.759927667008014
+          ]
+        },
+        {
+          "elapsed_steps": 20,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 30,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 40,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 50,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 60,
+          "new_times": [
+            17.19320508299279
+          ],
+          "worker_times": [
+            17.18197862501256
+          ]
+        },
+        {
+          "elapsed_steps": 61,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 2,
+          "new_times": [
+            17.12553587500588
+          ],
+          "worker_times": [
+            17.113946458994178
+          ]
+        }
+      ],
+      "reset_video_cleanup_and_metrics_json": "passed",
+      "seconds": 65.183
+    },
+    {
+      "task": "handle_basket",
+      "hf_revision": "0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+      "fixture_episodes_completed": 2,
+      "fixture_env_steps": 63,
+      "four_value_adapter_calls": 8,
+      "actual_model_refills": 3,
+      "cached_only_adapter_calls": 5,
+      "calls": [
+        {
+          "elapsed_steps": 10,
+          "new_times": [
+            18.04081908398075
+          ],
+          "worker_times": [
+            18.019063292013016
+          ]
+        },
+        {
+          "elapsed_steps": 20,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 30,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 40,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 50,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 60,
+          "new_times": [
+            17.32617754198145
+          ],
+          "worker_times": [
+            17.3149459999986
+          ]
+        },
+        {
+          "elapsed_steps": 61,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 2,
+          "new_times": [
+            17.413768667000113
+          ],
+          "worker_times": [
+            17.402302624977892
+          ]
+        }
+      ],
+      "reset_video_cleanup_and_metrics_json": "passed",
+      "seconds": 66.523
+    },
+    {
+      "task": "items_handover",
+      "hf_revision": "fabe9462853965228e90e34bd517aa4e43bad323",
+      "fixture_episodes_completed": 2,
+      "fixture_env_steps": 63,
+      "four_value_adapter_calls": 8,
+      "actual_model_refills": 3,
+      "cached_only_adapter_calls": 5,
+      "calls": [
+        {
+          "elapsed_steps": 10,
+          "new_times": [
+            17.24501687497832
+          ],
+          "worker_times": [
+            17.22778804099653
+          ]
+        },
+        {
+          "elapsed_steps": 20,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 30,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 40,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 50,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 60,
+          "new_times": [
+            19.55883699998958
+          ],
+          "worker_times": [
+            19.545985040982487
+          ]
+        },
+        {
+          "elapsed_steps": 61,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 2,
+          "new_times": [
+            19.05832129099872
+          ],
+          "worker_times": [
+            18.945139458985068
+          ]
+        }
+      ],
+      "reset_video_cleanup_and_metrics_json": "passed",
+      "seconds": 69.151
+    },
+    {
+      "task": "drawer_open_place",
+      "hf_revision": "c0088d84a568f93fb4401aabafcc41cf643efcdd",
+      "fixture_episodes_completed": 2,
+      "fixture_env_steps": 63,
+      "four_value_adapter_calls": 8,
+      "actual_model_refills": 3,
+      "cached_only_adapter_calls": 5,
+      "calls": [
+        {
+          "elapsed_steps": 10,
+          "new_times": [
+            17.56517437499133
+          ],
+          "worker_times": [
+            17.548066915973322
+          ]
+        },
+        {
+          "elapsed_steps": 20,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 30,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 40,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 50,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 60,
+          "new_times": [
+            17.618094833014766
+          ],
+          "worker_times": [
+            17.60418754100101
+          ]
+        },
+        {
+          "elapsed_steps": 61,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 2,
+          "new_times": [
+            17.24845754200942
+          ],
+          "worker_times": [
+            17.23585733299842
+          ]
+        }
+      ],
+      "reset_video_cleanup_and_metrics_json": "passed",
+      "seconds": 65.741
+    },
+    {
+      "task": "sample_loading",
+      "hf_revision": "2a4f41ab3be8e5f544c890d6054bc8de3be5c53b",
+      "fixture_episodes_completed": 2,
+      "fixture_env_steps": 63,
+      "four_value_adapter_calls": 8,
+      "actual_model_refills": 3,
+      "cached_only_adapter_calls": 5,
+      "calls": [
+        {
+          "elapsed_steps": 10,
+          "new_times": [
+            17.394850999990012
+          ],
+          "worker_times": [
+            17.378271833003964
+          ]
+        },
+        {
+          "elapsed_steps": 20,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 30,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 40,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 50,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 60,
+          "new_times": [
+            18.247723083011806
+          ],
+          "worker_times": [
+            18.23593554200488
+          ]
+        },
+        {
+          "elapsed_steps": 61,
+          "new_times": [],
+          "worker_times": []
+        },
+        {
+          "elapsed_steps": 2,
+          "new_times": [
+            18.124255500006257
+          ],
+          "worker_times": [
+            18.111290583998198
+          ]
+        }
+      ],
+      "reset_video_cleanup_and_metrics_json": "passed",
+      "seconds": 66.884
+    }
+  ]
+}

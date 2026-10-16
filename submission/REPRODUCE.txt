@@ -1,5 +1,10 @@
 RoboSynChallenge submission candidate: official task-specific policy selection
 
+Latest correction: submission/SMOLVLA_ADAPTER_CORRECTION.txt documents the
+four-value adapter return and genuine cache-aware inference timings, retaining
+the image conversion from SMOLVLA_CORRECTION.txt. Run the evaluator-facing
+probe as well as the original checkpoint/image probes before resubmission.
+
 This package reuses the official EDEM-AI/RoboSynChallenge implementation at
 8818c82df5fa2522809b8105e7018950dcc9a9a8 and existing released checkpoints.
 No new model training has been performed. Preserve the upstream Apache-2.0
