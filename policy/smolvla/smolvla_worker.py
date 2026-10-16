@@ -94,6 +94,30 @@ def _load_obs(obs_path: str) -> tuple[dict[str, np.ndarray], str]:
     return obs, task
 
 
+def prepare_observation(obs: dict[str, np.ndarray], task: str) -> dict:
+    """Convert adapter RGB bytes to LeRobot's float32 [0, 1] image contract.
+
+    The frozen checkpoints use VISUAL=IDENTITY, so their processor does not
+    perform this conversion. Leave state/qvel/qf values in their original units.
+    Already-normalized floating-point images must not be divided a second time.
+    """
+    tensors = {}
+    for key, value in obs.items():
+        tensor = torch.from_numpy(value)
+        if key.startswith("observation.images."):
+            if tensor.dtype == torch.uint8:
+                tensor = tensor.to(dtype=torch.float32).div_(255.0)
+            elif tensor.is_floating_point():
+                tensor = tensor.to(dtype=torch.float32)
+                if not torch.isfinite(tensor).all() or not ((tensor >= 0) & (tensor <= 1)).all():
+                    raise ValueError(f"{key}: floating-point images must be finite and in [0, 1]")
+            else:
+                raise TypeError(f"{key}: expected uint8 [0, 255] or floating-point [0, 1]")
+        tensors[key] = tensor
+    tensors["task"] = task
+    return tensors
+
+
 def _send(payload: dict) -> None:
     sys.stdout.write(json.dumps(payload) + "\n")
     sys.stdout.flush()
@@ -123,8 +147,7 @@ def main() -> int:
 
             with contextlib.redirect_stdout(sys.stderr):
                 obs, task = _load_obs(request["obs_path"])
-                obs = {key: torch.from_numpy(value) for key, value in obs.items()}
-                obs["task"] = task
+                obs = prepare_observation(obs, task)
                 proc_obs = preprocessor(obs)
 
                 num_actions = int(request.get("n_action_steps", 1))

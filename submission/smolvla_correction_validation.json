@@ -1,0 +1,85 @@
+{
+  "evaluation": "eval_412bc052c68847",
+  "device": "cpu",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python": "3.12.10",
+  "torch": "2.7.1",
+  "torchvision": "0.22.1",
+  "transformers": "5.5.4",
+  "lerobot_source": {
+    "url": "https://github.com/huggingface/lerobot.git",
+    "vcs_info": {
+      "vcs": "git",
+      "commit_id": "146d8474932c8b566717eb2738ba459337ab71c4",
+      "requested_revision": "146d8474932c8b566717eb2738ba459337ab71c4"
+    }
+  },
+  "test_scope": "Real worker RPC and checkpoint inference on synthetic byte cameras; no simulator or success rate.",
+  "results": [
+    {
+      "task": "table_rearrangement",
+      "hf_revision": "913b29a7136876108a330aead1855309f985cbd8",
+      "input": "three batched 480x640 RGBA uint8 cameras via encode_obs",
+      "action_shape_per_call": [
+        10,
+        14
+      ],
+      "fresh_inference_calls": 2,
+      "reset_calls": 3,
+      "finite_actions": true,
+      "seconds": 45.847
+    },
+    {
+      "task": "handle_basket",
+      "hf_revision": "0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+      "input": "three batched 480x640 RGBA uint8 cameras via encode_obs",
+      "action_shape_per_call": [
+        10,
+        14
+      ],
+      "fresh_inference_calls": 2,
+      "reset_calls": 3,
+      "finite_actions": true,
+      "seconds": 47.82
+    },
+    {
+      "task": "items_handover",
+      "hf_revision": "fabe9462853965228e90e34bd517aa4e43bad323",
+      "input": "three batched 480x640 RGBA uint8 cameras via encode_obs",
+      "action_shape_per_call": [
+        10,
+        14
+      ],
+      "fresh_inference_calls": 2,
+      "reset_calls": 3,
+      "finite_actions": true,
+      "seconds": 54.393
+    },
+    {
+      "task": "drawer_open_place",
+      "hf_revision": "c0088d84a568f93fb4401aabafcc41cf643efcdd",
+      "input": "three batched 480x640 RGBA uint8 cameras via encode_obs",
+      "action_shape_per_call": [
+        10,
+        14
+      ],
+      "fresh_inference_calls": 2,
+      "reset_calls": 3,
+      "finite_actions": true,
+      "seconds": 44.303
+    },
+    {
+      "task": "sample_loading",
+      "hf_revision": "2a4f41ab3be8e5f544c890d6054bc8de3be5c53b",
+      "input": "three batched 480x640 RGBA uint8 cameras via encode_obs",
+      "action_shape_per_call": [
+        10,
+        14
+      ],
+      "fresh_inference_calls": 2,
+      "reset_calls": 3,
+      "finite_actions": true,
+      "seconds": 44.537
+    }
+  ]
+}

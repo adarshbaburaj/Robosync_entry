@@ -25,7 +25,7 @@ https://edem-ai.github.io/RoboSynChallenge/html/tutorials/policy/your_own_policy
 Runtime requirements
 --------------------
 Use a supported Linux NVIDIA/CUDA/Vulkan environment. This Apple Silicon Mac
-has not run GPU simulation, model inference, or held-out evaluation.
+has run CPU model inference, but has not run NVIDIA simulation or held-out evaluation.
 Follow the official installation guide for EmbodiChain v0.2.4.post1 and the
 RoboSynChallenge extension. Keep EmbodiChain beside the code repository, or
 set EMBODICHAIN_ROOT to its absolute path. Use Python 3.11 for the locked ACT
@@ -41,9 +41,11 @@ Both lock LeRobot to b883328e6c95681ca90a18b102e4ae5e1f91e2bf (v0.3.3).
 That version does not export the processor functions used by the official
 SmolVLA worker. Keep the ACT/DP lock unchanged and use a separate Python 3.12
 SmolVLA worker environment with LeRobot pinned to
-b9cb121cb7d4e3e26ec5c906d08dda68d151ba52. That revision exports all five required processor symbols and has passed
-CPU model loading and synthetic inference checks. NVIDIA simulation remains
-untested.
+146d8474932c8b566717eb2738ba459337ab71c4, matching the revision identified in
+the organizer's image-dtype issue email. PyTorch is 2.7.1 (Linux CUDA build
+2.7.1+cu128), torchvision 0.22.1 (Linux 0.22.1+cu128), transformers 5.5.4.
+Other tested package versions are fixed in smolvla_runtime_constraints.txt.
+See SMOLVLA_CORRECTION.txt for the image contract and corrected validation.
 
   bash submission/setup_smolvla_worker.sh
 
@@ -82,7 +84,10 @@ organizers supply their held-out protocol. No scene parameters are modified.
 
 Submission status
 -----------------
-The entry was submitted as sub_e7b77da6cf6f4b and is pending organizer assignment. The target repository is https://github.com/adarshbaburaj/Robosync_entry and the
+The entry was submitted as sub_e7b77da6cf6f4b. The organizer's October 16 email
+reports five ACT/DP tasks completed and five SmolVLA tasks paused at first
+inference in eval_412bc052c68847. This correction fixes that image contract.
+The target repository is https://github.com/adarshbaburaj/Robosync_entry and the
 registered solo account has been approved and signed in.
 All ten checkpoint loads and model reset calls passed CPU compatibility checks,
 and code was pushed before the cutoff. The recorded request covers all ten
@@ -90,9 +95,9 @@ tasks. NVIDIA simulator rollouts remain to be checked during organizer evaluatio
 official pretrained policies with task-specific selection; do not describe the
 upstream training or benchmark numbers as the submitting team's own results.
 
-The official cutoff is October 11, 2026 23:59 AoE, equivalent to October 12,
-2026 15:59 Asia/Dubai. Submit and verify acceptance before 15:30 Dubai to allow
-time for access checks and corrections.
+The original entry met the preliminary cutoff. The issue email states there
+is no 24-hour deadline or overall correction limit; use its latest response
+form and an immutable full GitHub commit URL with ALL TEN checkpoint URLs.
 
 CPU compatibility probes
 ------------------------
@@ -114,8 +119,18 @@ base configuration and tokenizer used by the CPU probe and avoids moving-main
 base-model changes. All selected policy weights are then loaded strictly.
 
 Validated CPU results are in submission/validation_results.json.
-All ten policies passed strict weight loading, finite 14D synthetic actions,
-and reset checks; the actual SmolVLA worker RPC also passed.
+The original probes passed with floating-point synthetic images and missed
+the adapter's uint8 path. Those historical results are not evidence that the
+original byte-camera integration worked. Corrected checks use byte cameras:
+
+  python -m unittest submission.test_smolvla_images -v
+  python submission/probe_smolvla_worker.py all --device cpu \
+    --output submission/smolvla_correction_validation.json
+
+These use the real camera encoder, NPZ transport, worker process, checkpoint
+processor and model. Each of the five SmolVLA checkpoints receives two fresh
+inference calls after resets, returning finite 10x14 action chunks. They do
+not reproduce NVIDIA simulator rollouts or measure task success.
 
 For the Linux RTX 5090 environment, after uv sync --frozen for ACT and DP, run:
 
@@ -123,7 +138,7 @@ For the Linux RTX 5090 environment, after uv sync --frozen for ACT and DP, run:
 
 This selects PyTorch 2.7.1+cu128 and torchvision 0.22.1+cu128. Their CUDA 12.8
 wheels are published by PyTorch and match the public RTX 5090 protocol.
-The SmolVLA worker setup pins torch 2.11.0, torchvision 0.26.0, and transformers
-5.5.4, matching the tested CPU runtime. On Linux it selects their CUDA 12.8
+The corrected SmolVLA worker setup pins torch 2.7.1, torchvision 0.22.1, and
+transformers 5.5.4, matching the corrected CPU runtime. On Linux it selects CUDA 12.8
 Torch/Torchvision builds. Use a driver compatible with CUDA 12.8.
 GPU wheel availability was checked; GPU runtime itself was not tested here.

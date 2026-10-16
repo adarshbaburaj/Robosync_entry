@@ -69,7 +69,18 @@ def main():
     batch = {key: torch.zeros((1, *feature.shape), device=args.device)
              for key, feature in model.config.input_features.items()}
     if row["policy"] == "smolvla":
-        batch["task"] = [args.task.replace("_", " ")]
+        # Exercise the raw byte contract too; the original all-float fixture
+        # could not detect the evaluation's uint8 resize failure.
+        import numpy as np
+        from policy.smolvla.smolvla_worker import prepare_observation
+
+        raw = {}
+        for key, feature in model.config.input_features.items():
+            if key.startswith("observation.images."):
+                raw[key] = (np.arange(np.prod(feature.shape)) % 256).astype(np.uint8).reshape(feature.shape)
+            else:
+                raw[key] = np.zeros(feature.shape, dtype=np.float32)
+        batch = prepare_observation(raw, args.task.replace("_", " "))
         batch = preprocessor(batch)
     model.reset()
     started = time.perf_counter()

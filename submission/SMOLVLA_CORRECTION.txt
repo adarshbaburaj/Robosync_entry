@@ -1,0 +1,106 @@
+SmolVLA image-contract correction -- October 17, 2026
+Evaluation: eval_412bc052c68847
+Original frozen participant commit: 89e23c4d0bfc2879c02c2f07a5fba42d34599e10
+
+Cause and intended preprocessing
+-------------------------------
+The original encode_obs/_extract_image path yields contiguous CHW RGB uint8
+pixels in [0,255], including when the simulator supplies batched RGBA cameras.
+NPZ transport preserves dtype. torch.from_numpy also preserves uint8. All five
+selected SmolVLA checkpoints specify VISUAL=IDENTITY, so their preprocessor
+does not cast or divide image pixels. SmolVLA.prepare_images expects floats
+in [0,1] before bilinear resizing and then maps them to [-1,1] for SigLIP.
+The organizer's CUDA resize kernel rejected Byte input before any valid action.
+A dependency downgrade does not supply the missing conversion.
+
+prepare_observation() now converts observation.images.* tensors using
+torch.from_numpy(value).to(torch.float32).div_(255.0) for uint8 input, BEFORE
+the saved checkpoint processor or model resizing. Already-normalized floating
+images are cast to float32 without a second division. Non-finite/out-of-range
+floating images and other integer dtypes fail explicitly. State, velocity and
+force values retain their original dtype and units; their saved checkpoint
+normalization still applies. RGB order, camera mapping, gripper handling,
+action chunk length, task selection and all checkpoint weights are unchanged.
+
+Supported reproducible runtime
+------------------------------
+Python 3.12 (tested 3.12.10)
+LeRobot: https://github.com/huggingface/lerobot/tree/146d8474932c8b566717eb2738ba459337ab71c4
+PyTorch 2.7.1; Linux GPU target 2.7.1+cu128
+torchvision 0.22.1; Linux GPU target 0.22.1+cu128
+transformers 5.5.4; NumPy 2.2.6; huggingface-hub 1.33.0
+Remaining tested package versions: submission/smolvla_runtime_constraints.txt
+Install: bash submission/setup_smolvla_worker.sh
+The script uses PyTorch's cu128 backend on Linux, and the standard wheels on
+macOS. Export SMOLVLA_PYTHON to policy/smolvla/.venv-worker/bin/python and
+PYTHON_BIN to the simulator Python as described in REPRODUCE.txt. Do not point
+SMOLVLA_LEROBOT_ROOT at a different source revision.
+
+The fixed SmolVLM2 base dependency remains unchanged at
+https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct/tree/7b375e1b73b11138ff12fe22c8f2822d8fe03467
+All policy weights load with strict=True. The ACT/DP lock files, sources and
+CUDA setup are unchanged. Keep official episode seeds and success criteria.
+
+Validation and limits
+---------------------
+python -m unittest submission.test_smolvla_images -v
+python submission/probe_smolvla_worker.py all --device cpu \
+  --output submission/smolvla_correction_validation.json
+
+Regression assertions cover byte-to-float pixel correspondence, removal of
+RGBA alpha via the existing encoder, no double scaling, unchanged state units,
+invalid range rejection, and upstream prepare_images output in [-1,1].
+The CPU resize kernel accepts Byte, unlike the reported CUDA kernel, but
+the original Byte path still produces the wrong range after SigLIP scaling.
+Thus the tests explicitly inspect pixel dtype/range instead of relying on
+the presence or absence of a CPU runtime exception.
+
+The real worker probe uses three synthetic 480x640 RGBA uint8 simulator-shaped
+camera observations with nonconstant pixels covering 0 and 255, runs encode_obs,
+NPZ transport, saved processors and real checkpoint inference. Two fresh calls
+per checkpoint, with episode resets, each must return finite [10,14] actions.
+Machine-readable evidence: submission/smolvla_correction_validation.json.
+Original float-only probe results are retained in validation_results.json;
+they missed this bug and do not establish byte-camera compatibility.
+
+Validation is on an Apple Silicon CPU using the exact LeRobot revision and
+PyTorch 2.7.1. No claim of local CUDA/simulator or held-out success is made.
+The organizers must freeze this immutable correction and rerun the paused
+SmolVLA tasks through their official workflow. Previous ACT/DP evidence remains
+an organizer audit record; this patch does not imply any evaluation score.
+
+All ten checkpoint URLs
+-----------------------
+All are unchanged from selected_checkpoints.json. Each uses repository root
+as its checkpoint directory. No participant token or private invitation is
+required. Include all ten fields when submitting the official response form.
+
+click_bell (dp):
+https://huggingface.co/RoboSynChallenge/DP_sim_click_bell/tree/fb8c9551e0fade7c4888a926ab577b85f0684da1
+
+table_rearrangement (smolvla):
+https://huggingface.co/RoboSynChallenge/SmolVLA_sim_table_rearrangement/tree/913b29a7136876108a330aead1855309f985cbd8
+
+water_pouring (act):
+https://huggingface.co/RoboSynChallenge/ACT_sim_water_pouring/tree/0bf0fcfc931a69c52871385f28068fcf873cf07a
+
+handle_basket (smolvla):
+https://huggingface.co/RoboSynChallenge/SmolVLA_sim_handle_basket/tree/0de9a93f124bd4ebe2fbd0d572ce3133806b82a9
+
+items_handover (smolvla):
+https://huggingface.co/RoboSynChallenge/SmolVLA_sim_items_handover/tree/fabe9462853965228e90e34bd517aa4e43bad323
+
+drawer_open_place (smolvla):
+https://huggingface.co/RoboSynChallenge/SmolVLA_sim_drawer_open_place/tree/c0088d84a568f93fb4401aabafcc41cf643efcdd
+
+mixer_operating (act):
+https://huggingface.co/RoboSynChallenge/ACT_sim_mixer_operating/tree/0f12c53a2a6e093ae5e1e28f20480296b45fdf2b
+
+item_assembly (act):
+https://huggingface.co/RoboSynChallenge/ACT_sim_item_assembly/tree/58955958519157176712a1eff319018d78177ddb
+
+manipulate_pipette (act):
+https://huggingface.co/RoboSynChallenge/ACT_sim_manipulate_pipette/tree/ca013b2e202d594bf347530c61c3ba28c06d1bc2
+
+sample_loading (smolvla):
+https://huggingface.co/RoboSynChallenge/SmolVLA_sim_sample_loading/tree/2a4f41ab3be8e5f544c890d6054bc8de3be5c53b

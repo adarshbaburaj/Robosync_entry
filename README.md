@@ -2,7 +2,9 @@
 
 RoboSynChallenge preliminary entry prepared by Adarsh Baburaj. This repository reuses official pretrained policies and selects a policy per task from published reference results. No new training is claimed.
 
-**Submission status:** submitted for ranked preliminary evaluation as [`sub_e7b77da6cf6f4b`](https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b), with portal status **Submitted** and stage **Pending assignment**. See [receipt](submission/submission_receipt.json). All ten checkpoints passed strict CPU weight loading, finite 14D synthetic inference, and reset checks; the actual SmolVLA worker RPC also passed. [Validation results](submission/validation_results.json). NVIDIA simulation and official held-out evaluation remain untested.
+**Evaluation update (October 17, 2026):** for evaluation `eval_412bc052c68847`, the organizers reported five ACT/DP tasks completed and five SmolVLA tasks paused at the first inference because camera bytes were not converted to float images. The worker now converts RGB `uint8` [0, 255] to `float32` [0, 1] before the checkpoint processor and image resizing. See [correction and supported runtime](submission/SMOLVLA_CORRECTION.txt) and [byte-camera worker validation](submission/smolvla_correction_validation.json). Official GPU reevaluation is still required.
+
+Original ranked entry: [`sub_e7b77da6cf6f4b`](https://robosyn-bench.net/#/submission/sub_e7b77da6cf6f4b), [receipt](submission/submission_receipt.json). The [original CPU probes](submission/validation_results.json) used floating-point synthetic images and missed the real adapter's byte-image path; they are retained as historical evidence.
 
 ## Reproduce
 

@@ -13,15 +13,14 @@ fi
 if [[ ! -x "$worker_dir/bin/python" ]]; then
     uv venv --python 3.12 "$worker_dir"
 fi
-uv pip install --python "$worker_dir/bin/python" \
-    'lerobot[smolvla] @ git+https://github.com/huggingface/lerobot.git@b9cb121cb7d4e3e26ec5c906d08dda68d151ba52' \
-    'torch==2.11.0' 'torchvision==0.26.0' 'transformers==5.5.4'
-
+torch_backend=auto
 if [[ "$(uname -s)" == Linux ]]; then
-    uv pip install --python "$worker_dir/bin/python" \
-        --index-url https://download.pytorch.org/whl/cu128 \
-        'torch==2.11.0+cu128' 'torchvision==0.26.0+cu128'
+    torch_backend=cu128
 fi
+uv pip install --python "$worker_dir/bin/python" --torch-backend "$torch_backend" \
+    'lerobot[smolvla] @ git+https://github.com/huggingface/lerobot.git@146d8474932c8b566717eb2738ba459337ab71c4' \
+    'torch==2.7.1' 'torchvision==0.22.1' 'transformers==5.5.4' \
+    --constraint "$script_dir/smolvla_runtime_constraints.txt"
 
 "$worker_dir/bin/python" -c 'from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy; from lerobot.processor import PolicyProcessorPipeline, batch_to_transition, policy_action_to_transition, transition_to_batch, transition_to_policy_action; print("SmolVLA worker imports passed. Checkpoint loading and GPU inference still need verification.")'
 printf 'Set SMOLVLA_PYTHON to %s/bin/python\n' "$worker_dir"
