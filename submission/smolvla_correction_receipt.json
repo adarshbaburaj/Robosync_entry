@@ -1,0 +1,37 @@
+{
+  "evaluation_id": "eval_412bc052c68847",
+  "original_submission_id": "sub_e7b77da6cf6f4b",
+  "correction_commit": "8a566c399b767e559d8e3dfd5769010cb480f172",
+  "code_link": "https://github.com/adarshbaburaj/Robosync_entry/tree/8a566c399b767e559d8e3dfd5769010cb480f172",
+  "response_kind": "correct",
+  "checkpoint_urls": {
+    "click_bell": "https://huggingface.co/RoboSynChallenge/DP_sim_click_bell/tree/fb8c9551e0fade7c4888a926ab577b85f0684da1",
+    "table_rearrangement": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_table_rearrangement/tree/913b29a7136876108a330aead1855309f985cbd8",
+    "water_pouring": "https://huggingface.co/RoboSynChallenge/ACT_sim_water_pouring/tree/0bf0fcfc931a69c52871385f28068fcf873cf07a",
+    "handle_basket": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_handle_basket/tree/0de9a93f124bd4ebe2fbd0d572ce3133806b82a9",
+    "items_handover": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_items_handover/tree/fabe9462853965228e90e34bd517aa4e43bad323",
+    "drawer_open_place": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_drawer_open_place/tree/c0088d84a568f93fb4401aabafcc41cf643efcdd",
+    "mixer_operating": "https://huggingface.co/RoboSynChallenge/ACT_sim_mixer_operating/tree/0f12c53a2a6e093ae5e1e28f20480296b45fdf2b",
+    "item_assembly": "https://huggingface.co/RoboSynChallenge/ACT_sim_item_assembly/tree/58955958519157176712a1eff319018d78177ddb",
+    "manipulate_pipette": "https://huggingface.co/RoboSynChallenge/ACT_sim_manipulate_pipette/tree/ca013b2e202d594bf347530c61c3ba28c06d1bc2",
+    "sample_loading": "https://huggingface.co/RoboSynChallenge/SmolVLA_sim_sample_loading/tree/2a4f41ab3be8e5f544c890d6054bc8de3be5c53b"
+  },
+  "notes": "Correction for eval_412bc052c68847: we confirm the original SmolVLA adapter had an image input-contract bug. _extract_image() supplies CHW RGB uint8 [0,255]; torch.from_numpy() retained Byte; the checkpoint VISUAL=IDENTITY processor did not normalize it. The original submission should not be treated as working unchanged.\n\nIn the corrected worker, prepare_observation() explicitly converts observation.images.* uint8 tensors to torch.float32 and divides by 255.0 BEFORE the saved checkpoint processor and upstream bilinear resizing. Normalized float images are preserved without a second division; invalid ranges/non-finite floats are rejected. Joint state/qvel/qf retain their original units and checkpoint normalization. Camera mapping, strategy, action/gripper handling and ALL TEN checkpoints/revisions remain unchanged.\n\nSupported worker: Python 3.12 (tested 3.12.10), official LeRobot commit 146d8474932c8b566717eb2738ba459337ab71c4, PyTorch 2.7.1 (Linux GPU 2.7.1+cu128), torchvision 0.22.1 (Linux 0.22.1+cu128), transformers 5.5.4. bash submission/setup_smolvla_worker.sh installs these with submission/smolvla_runtime_constraints.txt. Set SMOLVLA_PYTHON=$PWD/policy/smolvla/.venv-worker/bin/python and PYTHON_BIN to the official simulator Python. ACT/DP sources and lock files are unchanged. The SmolVLM2 base revision remains 7b375e1b73b11138ff12fe22c8f2822d8fe03467.\n\nValidation: four regression tests pass, explicitly checking dtype/range, exact byte scaling, unchanged state units and upstream prepare_images output range. All FIVE affected checkpoints passed the real encode_obs -> NPZ -> subprocess worker -> saved processor -> model inference path on CPU, using three nonconstant 480x640 RGBA uint8 cameras, two fresh inference calls with episode resets per checkpoint, each returning finite [10,14] actions. The updated strict single-checkpoint probe also passed for drawer_open_place. The setup script installed/imported successfully on macOS, and a Linux x86_64 cu128 dependency dry-run resolved the specified GPU builds. CPU kernels can accept Byte while CUDA rejects it, so tests assert the image contract directly. These are compatibility checks, not local CUDA/simulator rollouts or success-rate claims.\n\nFull explanation, reproduction commands and all TEN unchanged checkpoint URLs: submission/SMOLVLA_CORRECTION.txt. Machine-readable five-worker evidence: submission/smolvla_correction_validation.json. Historical original float-only tests are retained; they missed this byte-camera path. Please generate the official frozen correction bundle and reevaluate the paused tasks through the official workflow, preserving the official seed packet and success criteria. We understand the correction may supersede displayed results while existing evidence is retained for audit.",
+  "observed_at_utc": "2026-10-16T20:45:54.081082+00:00",
+  "official_form_heading": "Response recorded",
+  "official_form_message": "Your response has been recorded. Your registered team details and original submission are unchanged.",
+  "status": "Correction response recorded; frozen correction bundle and official GPU reevaluation not yet verified.",
+  "validation": {
+    "image_regression_tests_passed": 4,
+    "smolvla_checkpoints_real_worker_passed": 5,
+    "fresh_inference_calls_per_checkpoint": 2,
+    "action_chunk_shape": [
+      10,
+      14
+    ],
+    "device": "cpu",
+    "strict_drawer_checkpoint_probe_passed": true,
+    "setup_script_install_import_passed": true,
+    "linux_cu128_dependency_resolution": "dry-run passed; GPU execution not performed"
+  }
+}
